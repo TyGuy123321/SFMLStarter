@@ -1,10 +1,6 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager(entt::registry& registry) : registry_{registry} {
-    registry_.ctx()
-        .get<entt::dispatcher>()
-        .sink<SceneChangeEvent>()
-        .connect<&SceneManager::onSceneChanged>(this);
 }
 
 void SceneManager::changeScene(std::unique_ptr<Scene> scene) {
@@ -39,8 +35,4 @@ void SceneManager::render() {
     if (scene_) {
         scene_->render(registry_);
     }
-}
-
-void SceneManager::onSceneChanged(const SceneChangeEvent& event) {
-    changeScene(event.factory());
 }
