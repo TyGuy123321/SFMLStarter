@@ -1,0 +1,26 @@
+#include "Systems.h"
+
+#include <entt/entt.hpp>
+#include <SFML/Graphics.hpp>
+
+#include "Components.h"
+
+namespace {
+
+float getAxis(sf::Keyboard::Scancode negative, sf::Keyboard::Scancode positive) {
+    float axis{};
+
+    if (sf::Keyboard::isKeyPressed(negative)) {
+        axis -= 1.f;
+    }
+
+    if (sf::Keyboard::isKeyPressed(positive)) {
+        axis += 1.f;
+    }
+
+    return axis;
+}
+
+}
+
+// TODO
