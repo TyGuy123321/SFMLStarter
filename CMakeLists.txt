@@ -15,6 +15,8 @@ set(ASSETS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/assets")
 add_executable(${PROJECT_NAME}
         main.cpp
         scenes/MainScene.cpp
+        AssetManager.cpp
+        Scene.cpp
         SceneManager.cpp
         Systems.cpp
 )

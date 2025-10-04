@@ -19,23 +19,23 @@ public:
     AssetManager& operator=(AssetManager&&) = default;
 
     template <typename T>
-    const T& get(const std::string& key) {
-        if (const auto it = assets_.find(key); it != assets_.end()) {
-            return std::any_cast<const T&>(it->second);
-        }
-
-        T asset{};
-        if (!asset.loadFromFile(key)) {
-            throw AssetNotFoundException(key);
-        }
-
-        auto [it, _] = assets_.insert_or_assign(key, std::move(asset));
-        return std::any_cast<const T&>(it->second);
-    }
-
-    void clear() {
-        assets_.clear();
-    }
+    const T& get(const std::string& key);
+    void clear();
 private:
     std::unordered_map<std::string, std::any> assets_{};
 };
+
+template <typename T>
+inline const T& AssetManager::get(const std::string& key) {
+    if (const auto it = assets_.find(key); it != assets_.end()) {
+        return std::any_cast<const T&>(it->second);
+    }
+
+    T asset{};
+    if (!asset.loadFromFile(key)) {
+        throw AssetNotFoundException(key);
+    }
+
+    auto [it, _] = assets_.insert_or_assign(key, std::move(asset));
+    return std::any_cast<const T&>(it->second);
+}
