@@ -13,5 +13,5 @@ void MainScene::onExit(entt::registry& registry) {
 void MainScene::update(entt::registry& registry, float deltaTime) {
 }
 
-void MainScene::render(entt::registry& registry) {
+void MainScene::render(entt::registry& registry, sf::RenderTarget& renderTarget) {
 }
