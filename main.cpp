@@ -12,9 +12,8 @@ int main() {
     entt::registry registry{};
     registry.ctx().emplace<entt::dispatcher>();
     auto& assetManager{registry.ctx().emplace<AssetManager>()};
-    auto& window{registry.ctx().emplace<sf::RenderWindow>(sf::VideoMode{{config::kWidth, config::kHeight}}, config::kTitle)};
-    sf::View view{sf::FloatRect{{0.f, 0.f}, {config::kWidth, config::kHeight}}};
-    window.setView(view);
+
+    sf::RenderWindow window{sf::VideoMode{{config::kWidth, config::kHeight}}, config::kTitle};
     window.setFramerateLimit(config::kFps);
     window.setKeyRepeatEnabled(false);
 
@@ -27,7 +26,7 @@ int main() {
         while ((opt = window.pollEvent()).has_value()) {
             const auto& event{opt.value()};
 
-            sceneManager.handleEvent(event);
+            sceneManager.handleEvent(window, event);
             if (event.is<sf::Event::Closed>()) {
                 window.close();
             }
@@ -37,8 +36,7 @@ int main() {
         sceneManager.update(deltaTime);
 
         window.clear(config::kColor);
-        window.setView(view); // TODO: should this be set on a per scene basis?
-        sceneManager.render();
+        sceneManager.render(window);
         window.display();
     }
 

@@ -18,9 +18,9 @@ void SceneManager::clearScene() {
     changeScene(nullptr);
 }
 
-bool SceneManager::handleEvent(const sf::Event& event) {
+bool SceneManager::handleEvent(const sf::Window& eventSource, const sf::Event& event) {
     if (scene_) {
-        return scene_->handleEvent(registry_, event);
+        return scene_->handleEvent(registry_, eventSource, event);
     }
     return false;
 }
@@ -31,8 +31,8 @@ void SceneManager::update(float deltaTime) {
     }
 }
 
-void SceneManager::render() {
+void SceneManager::render(sf::RenderTarget& renderTarget) {
     if (scene_) {
-        scene_->render(registry_);
+        scene_->render(registry_, renderTarget);
     }
 }

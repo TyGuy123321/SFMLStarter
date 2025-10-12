@@ -9,7 +9,7 @@ public:
 
     virtual void onEnter(entt::registry& registry);
     virtual void onExit(entt::registry& registry);
-    virtual bool handleEvent(entt::registry& registry, const sf::Event& event);
+    virtual bool handleEvent(entt::registry& registry, const sf::Window& eventSource, const sf::Event& event);
     virtual void update(entt::registry& registry, float deltaTime);
-    virtual void render(entt::registry& registry);
+    virtual void render(entt::registry& registry, sf::RenderTarget& renderTarget);
 };
