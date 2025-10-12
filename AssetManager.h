@@ -39,3 +39,19 @@ inline const T& AssetManager::get(const std::string& key) {
     auto [it, _] = assets_.insert_or_assign(key, std::move(asset));
     return std::any_cast<const T&>(it->second);
 }
+
+// Specialization for sf::Font
+template <>
+inline const sf::Font& AssetManager::get(const std::string& key) {
+    if (const auto it = assets_.find(key); it != assets_.end()) {
+        return std::any_cast<const sf::Font&>(it->second);
+    }
+
+    sf::Font font{};
+    if (!font.openFromFile(key)) {
+        throw AssetNotFoundException(key);
+    }
+
+    auto [it, _] = assets_.insert_or_assign(key, std::move(font));
+    return std::any_cast<const sf::Font&>(it->second);
+}

@@ -1,8 +1,5 @@
 #include "Systems.h"
 
-#include <entt/entt.hpp>
-#include <SFML/Graphics.hpp>
-
 #include "Components.h"
 
 namespace {
