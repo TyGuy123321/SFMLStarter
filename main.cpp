@@ -9,9 +9,9 @@
 #include "SceneManager.h"
 
 int main() {
-    entt::registry registry{};
+    entt::registry registry;
     registry.ctx().emplace<entt::dispatcher>();
-    auto& assetManager{registry.ctx().emplace<AssetManager>()};
+    auto& assetManager = registry.ctx().emplace<AssetManager>();
 
     sf::RenderWindow window{sf::VideoMode{{config::kWidth, config::kHeight}}, config::kTitle};
     window.setFramerateLimit(config::kFps);
@@ -20,11 +20,11 @@ int main() {
     SceneManager sceneManager{registry};
     sceneManager.changeScene(std::make_unique<MainScene>());
 
-    sf::Clock clock{};
+    sf::Clock clock;
     while (window.isOpen()) {
-        std::optional<sf::Event> opt{};
+        std::optional<sf::Event> opt;
         while ((opt = window.pollEvent()).has_value()) {
-            const auto& event{opt.value()};
+            const auto& event = opt.value();
 
             sceneManager.handleEvent(window, event);
             if (event.is<sf::Event::Closed>()) {
@@ -32,7 +32,7 @@ int main() {
             }
         }
 
-        const auto deltaTime{clock.restart().asSeconds()};
+        const auto deltaTime = clock.restart().asSeconds();
         sceneManager.update(deltaTime);
 
         window.clear(config::kColor);

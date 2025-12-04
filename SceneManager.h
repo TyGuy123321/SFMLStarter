@@ -18,5 +18,5 @@ public:
     void render(sf::RenderTarget& renderTarget);
 private:
     entt::registry& registry_;
-    std::unique_ptr<Scene> scene_{};
+    std::unique_ptr<Scene> scene_;
 };

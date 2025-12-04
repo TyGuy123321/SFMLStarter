@@ -22,7 +22,7 @@ public:
     const T& get(const std::string& key);
     void clear();
 private:
-    std::unordered_map<std::string, std::any> assets_{};
+    std::unordered_map<std::string, std::any> assets_;
 };
 
 template <typename T>
@@ -47,7 +47,7 @@ inline const sf::Font& AssetManager::get(const std::string& key) {
         return std::any_cast<const sf::Font&>(it->second);
     }
 
-    sf::Font font{};
+    sf::Font font;
     if (!font.openFromFile(key)) {
         throw AssetNotFoundException(key);
     }

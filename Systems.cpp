@@ -5,7 +5,7 @@
 namespace {
 
 float getAxis(sf::Keyboard::Scancode negative, sf::Keyboard::Scancode positive) {
-    float axis{};
+    float axis = 0.0f;
 
     if (sf::Keyboard::isKeyPressed(negative)) {
         axis -= 1.f;
