@@ -12,14 +12,13 @@ find_package(SFML 3 COMPONENTS Graphics Window System REQUIRED)
 set(ASSETS_SOURCE_DIR "${CMAKE_SOURCE_DIR}/assets")
 set(ASSETS_OUTPUT_DIR "${CMAKE_BINARY_DIR}/assets")
 
-add_executable(${PROJECT_NAME}
-        main.cpp
-        scenes/MainScene.cpp
-        AssetManager.cpp
-        Scene.cpp
-        SceneManager.cpp
-        Systems.cpp
-)
+# include all source files
+file(GLOB_RECURSE SOURCES "src/*.cpp")
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+# look for headers in the include/ directory
+target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
 include(FetchContent)
 
@@ -47,10 +46,7 @@ target_link_libraries(${PROJECT_NAME}
         box2d
 )
 
-target_include_directories(${PROJECT_NAME}
-        PRIVATE
-        ${entt_SOURCE_DIR}/src
-)
+target_link_libraries(${PROJECT_NAME} PRIVATE EnTT::EnTT)
 
 add_custom_command(
         TARGET ${PROJECT_NAME} POST_BUILD

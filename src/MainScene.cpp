@@ -1,8 +1,8 @@
 #include "MainScene.h"
 
-#include "../AssetManager.h"
-#include "../Components.h"
-#include "../Systems.h"
+#include "AssetManager.h"
+#include "Components.h"
+#include "Systems.h"
 
 void MainScene::onEnter(entt::registry& registry) {
 }

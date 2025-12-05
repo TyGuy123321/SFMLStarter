@@ -3,9 +3,9 @@
 #include <entt/entt.hpp>
 #include <SFML/Graphics.hpp>
 
-#include "scenes/MainScene.h"
 #include "AssetManager.h"
 #include "Config.h"
+#include "MainScene.h"
 #include "SceneManager.h"
 
 int main() {
